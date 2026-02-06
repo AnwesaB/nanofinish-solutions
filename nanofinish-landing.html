@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NanoFinish Solutions | Engineering Precision. Digitally Delivered.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0e1a;
+            --color-surface: #131824;
+            --color-surface-elevated: #1a2030;
+            --color-primary: #00d4ff;
+            --color-secondary: #6366f1;
+            --color-accent: #f59e0b;
+            --color-text: #e2e8f0;
+            --color-text-muted: #94a3b8;
+            --color-border: #1e293b;
+            --font-display: 'Orbitron', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --font-body: 'Manrope', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated grid background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--color-border);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 26, 0.8);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-header {
+            font-family: var(--font-mono);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            background: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+        }
+
+        .btn-header:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-shop {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border: 1px solid var(--color-accent);
+        }
+
+        .btn-shop:hover {
+            background: #d97706;
+            border-color: #d97706;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 6rem;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-primary);
+            border-radius: 2px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero .subheadline {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero .value-statement {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+            max-width: 650px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            font-family: var(--font-mono);
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--color-border);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 4rem;
+            max-width: 700px;
+        }
+
+        /* Audience Grid */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border: 1px solid var(--color-border);
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .audience-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .audience-card h3 {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .audience-card p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        /* Product Categories */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--color-border);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: var(--color-primary);
+            opacity: 0.05;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateX(5px);
+            border-color: var(--color-secondary);
+        }
+
+        .product-card:hover::after {
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+        }
+
+        .product-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        .product-card p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        /* Why Choose Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .why-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--color-bg);
+        }
+
+        .why-content p {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Problem-Solution Section */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .solution-block {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border-left: 3px solid var(--color-primary);
+            position: relative;
+        }
+
+        .solution-block h3 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .solution-block p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .solution-block:nth-child(2) {
+            border-left-color: var(--color-secondary);
+        }
+
+        .solution-block:nth-child(3) {
+            border-left-color: var(--color-accent);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .use-cases li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            position: relative;
+            padding-left: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .use-cases li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .use-cases li:hover {
+            color: var(--color-text);
+            padding-left: 2.5rem;
+        }
+
+        .use-cases li:hover::before {
+            color: var(--color-accent);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 3rem 0;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-statement {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border-left: 4px solid var(--color-primary);
+            margin-top: 2rem;
+            font-style: italic;
+            color: var(--color-text);
+        }
+
+        /* Trust Section */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .trust-item:hover {
+            border-color: var(--color-primary);
+        }
+
+        .trust-check {
+            width: 24px;
+            height: 24px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg);
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .trust-item p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.03) 100%);
+        }
+
+        .final-cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-surface);
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-nav {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-header {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 5rem 0 4rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .audience-grid,
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Scroll reveal animation */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            animation: slideInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">NanoFinish Solutions</div>
+                <nav class="header-nav">
+                    <a href="https://nanofinishsolutions.gumroad.com" target="_blank" rel="noopener noreferrer" class="btn-header btn-shop">Shop Products</a>
+                    <a href="/cdn-cgi/l/email-protection#650b040b0a030c0b0c160d160a0910110c0a0b16250a1011090a0a0e4b060a08" class="btn-header">Contact Us</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-badge">Digital Manufacturing Tools</div>
+                <h1>Engineering Precision.<br>Digitally Delivered.</h1>
+                <p class="subheadline">Practical digital tools and knowledge systems for surface finishing, manufacturing engineering, and cloud-enabled production.</p>
+                <p class="value-statement">NanoFinish Solutions develops engineer-built digital products that help professionals, small manufacturers, and educators make better process decisions, reduce trial-and-error, and modernize manufacturing workflows.</p>
+                <div class="cta-group">
+                    <a href="https://nanofinishsolutions.gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Explore Digital Tools</a>
+                    <a href="#audience" class="btn btn-secondary">View Solutions by Industry</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who We Serve -->
+        <section id="audience">
+            <div class="container">
+                <h2 class="section-title">Built for People Who Build Things</h2>
+                <p class="section-intro">Our products are designed for those working at the intersection of manufacturing reality and engineering precision.</p>
+
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <h3>Manufacturing Professionals</h3>
+                        <p>Decision-support tools, process guides, and reference frameworks to solve real shop-floor and design-stage challenges in surface finishing and production engineering.</p>
+                    </div>
+                    <div class="audience-card">
+                        <h3>Small & Medium Manufacturing Businesses</h3>
+                        <p>Cost-effective digital tools that replace guesswork with structured decision-making, helping teams improve quality, consistency, and process reliability without large consulting budgets.</p>
+                    </div>
+                    <div class="audience-card">
+                        <h3>Education & Training Institutions</h3>
+                        <p>Industry-aligned learning resources, case-based tools, and practical frameworks that bridge the gap between academic theory and real manufacturing applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Offer -->
+        <section id="products">
+            <div class="container">
+                <h2 class="section-title">Digital Products for Modern Manufacturing</h2>
+                <p class="section-intro">We don't sell software licenses or generic courses. We build focused digital products that engineers actually use.</p>
+
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h3>Surface Finishing Decision Tools</h3>
+                        <p>Interactive tools that guide users through surface parameter selection, finishing process mapping, risk identification, and functional requirements such as fatigue, sealing, and wear.</p>
+                    </div>
+                    <div class="product-card">
+                        <h3>Manufacturing Engineering Frameworks</h3>
+                        <p>Downloadable templates, checklists, calculators, and process maps designed to support design for manufacturing, quality control, and process optimization.</p>
+                    </div>
+                    <div class="product-card">
+                        <h3>Cloud Applications in Manufacturing</h3>
+                        <p>Practical guides and project-based resources showing how cloud platforms like AWS can be applied to manufacturing data, quality tracking, traceability, and decision systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why NanoFinish -->
+        <section id="why">
+            <div class="container">
+                <h2 class="section-title">Why Engineers Choose NanoFinish</h2>
+
+                <div class="why-grid">
+                    <div class="why-item">
+                        <div class="why-icon">01</div>
+                        <div class="why-content">
+                            <p>Built by engineers with real manufacturing and academic experience</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">02</div>
+                        <div class="why-content">
+                            <p>Focused on application, not theory-heavy documentation</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">03</div>
+                        <div class="why-content">
+                            <p>Designed for immediate use, not long onboarding cycles</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">04</div>
+                        <div class="why-content">
+                            <p>Affordable alternatives to expensive software and consulting</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">05</div>
+                        <div class="why-content">
+                            <p>Structured, logic-driven tools instead of static PDFs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How Our Products Help -->
+        <section id="solution">
+            <div class="container">
+                <h2 class="section-title">From Uncertainty to Structured Decisions</h2>
+
+                <div class="solution-grid">
+                    <div class="solution-block">
+                        <h3>The Challenge</h3>
+                        <p>Surface finishing decisions are often based on habit, incomplete standards, or trial-and-error, leading to rework, quality issues, and wasted time.</p>
+                    </div>
+                    <div class="solution-block">
+                        <h3>Our Approach</h3>
+                        <p>We convert engineering knowledge into guided digital systems that help users evaluate function, material, tolerance, and process constraints step by step.</p>
+                    </div>
+                    <div class="solution-block">
+                        <h3>The Outcome</h3>
+                        <p>Clearer decisions, fewer production risks, better documentation, and more confidence across design, manufacturing, and quality teams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section id="use-cases">
+            <div class="container">
+                <h2 class="section-title">Where Our Tools Are Used</h2>
+
+                <ul class="use-cases">
+                    <li>Selecting surface finish parameters for fatigue-critical components</li>
+                    <li>Mapping realistic finishing processes during early design stages</li>
+                    <li>Training junior engineers using structured decision frameworks</li>
+                    <li>Supporting small manufacturers without in-house specialists</li>
+                    <li>Demonstrating cloud-based manufacturing workflows for education or pilot projects</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About NanoFinish Solutions</h2>
+
+                <div class="about-content">
+                    <p>NanoFinish Solutions is a digital product company focused on manufacturing engineering, surface finishing, and cloud-enabled industrial applications. We create tools that translate complex engineering knowledge into usable, decision-driven systems.</p>
+
+                    <div class="mission-statement">
+                        Our mission is to make advanced manufacturing knowledge accessible, practical, and affordable for professionals, small industries, and educators worldwide.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Credibility -->
+        <section id="trust">
+            <div class="container">
+                <h2 class="section-title">Designed with Engineering Integrity</h2>
+
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <div class="trust-check">✓</div>
+                        <p>Engineer-developed frameworks</p>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-check">✓</div>
+                        <p>Based on manufacturing standards and real-world constraints</p>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-check">✓</div>
+                        <p>Continuously refined through industry use and feedback</p>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-check">✓</div>
+                        <p>Suitable for professional, academic, and training environments</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Start Making Better Manufacturing Decisions</h2>
+                <p>Explore our growing library of digital tools for surface finishing, manufacturing engineering, and cloud applications.</p>
+                <a href="https://nanofinishsolutions.gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Browse Digital Products</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">NanoFinish Solutions</div>
+            <p>Digital tools and frameworks for surface finishing, manufacturing engineering, and cloud applications in industry. Built by engineers. Designed for real-world
